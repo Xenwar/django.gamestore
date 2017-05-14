@@ -1,5 +1,5 @@
 # django.gamestore
-An web application where developers sale their games and players purchase and play. 
+A web application where developers sale their games and players purchase and play. 
 Components (features):
 RESTful API.
 3rd party login. 
