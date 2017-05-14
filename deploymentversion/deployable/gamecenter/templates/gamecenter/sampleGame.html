@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>reverser</title>
+  <!--<script src="gamesite/js/jquery-1.11.3.min.js" type="text/javascript"></script>-->
+  <script type="text/javascript">
+  $(document).ready(function(){
+    var parentWindow = window.parent;
+    //Handler SCORE from game to the service
+    $("#morescore").click(function () {
+      var scorevalue = $('#morescore').val();
+      var msg = {};
+      msg.messageType = "SCORE";
+      msg.score       = scorevalue;
+      parentWindow.postMessage(msg,'*');
+      $('#morescore').val("0.0");   //prevent accidental more clicks
+      return false;
+    });
+    //Handler message SAVE from game to the service
+    $("#add_items").click(function () {
+      var scorevalue = $('#morescore').val();
+      var msg = {};
+      var gameState = {};
+      var playerItems = $('input[name=moreitems]:checked').map(function () { return this.value; }).toArray() 
+
+      gameState.playerItems = playerItems;
+      gameState.score       = scorevalue;
+
+      msg.messageType = "SAVE";
+      msg.gameState   = gameState;
+      parentWindow.postMessage(msg,'*');
+      // Needs more work on resetting the checked boxes. 
+      $('#morescore').val("0.0"); //prevent accidental more clicks
+      return false;
+    });
+    //message LOAD_REQUEST from game to the service
+    $("#loading").click(function () {
+      var msg = {};
+      msg.messageType = "LOAD_REQUEST";
+      parentWindow.postMessage(msg,'*');
+      return false;
+    });
+    //message SETTING from game to the service
+    $("#changeresolution").click(function () {
+      var width  = $('#width').val();
+      var height = $('#height').val();
+
+      var msg = {};
+      var options = {};
+
+      options.width        = width;
+      options.height       = height;
+
+      msg.messageType = "SETTING";
+      msg.options   = options;
+      parentWindow.postMessage(msg,'*');
+      return false;
+    });
+  });
+  //http://stackoverflow.com/questions/958908/how-do-you-reverse-a-string-in-place-in-javascript
+  function reverse(s){
+    return s.split("").reverse().join("");
+  }
+  </script>
+</head>
+<body>
+<form name="reverser">
+ <!--SCORE from game to the service-->
+  <input type="number" id="morescore" value = "0.0" min="0.0" max="1000.0" step="1.01">
+  <input type="submit" id="add_points" value = "Add points"/>
+
+ <!--message SAVE from game to the service--><br><hr>
+<label><input type="checkbox" id="moreitems" name="moreitems"  value="Sword">Sword</label><br>
+<label><input type="checkbox" id="moreitems" name="moreitems"  value="Wizard Hat">Wizard Hat</label><br>
+<label><input type="checkbox" id="moreitems" name="moreitems"  value="Gan">Gan</label><br>
+<label><input type="checkbox" id="moreitems" name="moreitems"  value="Wire">Wire</label><br>
+  <input type="submit" id="add_items" value = "save"/>
+<br><hr>
+  <input type="submit" id="loading" value = "Load Request"/>
+<br><hr>
+  Width<input type="number" id="width" value = "200" min="100" max="1000" step="50">
+  height<input type="number" id="height" value = "200" min="100" max="1000" step="50">
+  <input type="submit" id="changeresolution" value = "Change resolution"/>
+<br><hr>
+</form>
+
+</body>
+</html>

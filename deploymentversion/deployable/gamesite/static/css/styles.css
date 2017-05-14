@@ -1,0 +1,31 @@
+
+body {
+	  min-height:100%;
+    background-color: #f6eff7;
+}
+
+.header{
+  color: #a6bddb;
+  background-color: #112233;
+}
+.container {
+	background-color: #f6eff7;
+  min-height:100%;
+}
+.content {
+  min-height:100%;
+  background-color: #f6eff7;
+}
+.side-top {
+    background-color: #bdc9e1;
+}
+.side-bottom {
+    background-color: #a6bddb;
+}
+.footer{
+  color: #a6bddb;
+  background-color: #112233;
+}
+#gameframe {
+  background-color: grey;
+}

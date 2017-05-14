@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Game List</h1>
+    {% if game_list %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+        <th>Game</th>
+        <th>Purchase Date</th>
+        <th>Description</th>
+        <th>price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for game in game_list %}
+            <tr>
+            <td><a href="{{ game.get_absolute_url }}">{{ game.game_name }}</a></td>
+            <td>{{ purchased }}          </td>
+            <td>{{ game.game_description}}         </td>
+            <td>{{ game.price }}                   </td>            
+              <!--end of getting developer's games-->
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+         <p>There are no games in the system at the moment..</p>
+    {% endif %}
+{% endblock %}
+
+  

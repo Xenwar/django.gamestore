@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Developers List</h1>
+    {% if member_list %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Games</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for developer in member_list %}
+            <tr>
+            <td>{{ developer.first_name }}</td>
+            <td>{{ developer.last_name }} </td>
+            <td>{{ developer.email }}     </td>
+            <td>
+              <!--cllect developer's games-->
+                {% for game in developer.game_reverse_lookup.all %}
+                  <a href="{% url 'game-detail' game.pk %}">{{ game.game_name}}</a>
+
+                  {% if not forloop.last %},
+
+                  {% endif %}{% endfor %}
+              <!--end of getting developer's games-->
+            </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+        <p>There are no developers in the system at the moment..</p>
+    {% endif %}
+{% endblock %}
+
+
+

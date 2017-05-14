@@ -1,0 +1,104 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      {% block title %}
+      <title>Game Store</title>
+      {% endblock %}
+      {% load static %}     
+      <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   </head>
+   <body>
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-12">
+               <div class="header">
+                  <ul class="nav nav-tabs">
+                     <li><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home">
+                        </span>  Home</a>
+                     </li>
+                     <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="caret" ></span>Developers</a>
+                        <!--Next developer's options -->
+                        <ul class="dropdown-menu">
+                           <li><a href="{% url 'addgame' %}">Add new Game</a></li>
+                           <li><a href="{% url 'developergames' %}">Sales Statistics</a></li>
+                        </ul>
+                     </li>
+                     <!--player related functionalities-->
+                     <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span>Players</a>
+                        <ul class="dropdown-menu">
+                           <li><a href="{% url 'playergames' %}">My Games</a></li>
+                           <!--go to game list (all games)-->
+                        </ul>
+                     </li>
+                     <!--Game related functionalities-->
+                     <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span>Games</a>
+                        <ul class="dropdown-menu">
+                           <li><a href="{% url 'games' %}">All Games</a></li>
+                           <!--go to game list (all games)-->
+                        </ul>
+                     </li>
+                     {% if user.is_authenticated %}
+                     <li><a href="{% url 'logout'%}?next={{request.path}}"><span class="glyphicon glyphicon-user"></span> {{ user.get_username }} <span class="glyphicon glyphicon-log-out"></span></a></li>
+                     {% else %}
+                     <li><a href="{% url 'login'%}?next={{request.path}}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                     {% endif %}
+                     <li><a href="{% url 'activation' %}">Activate An account</a></li>
+                     <li><a href="{% url 'register' %}">Create An account</a></li>
+                     <li><a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-7">
+               <div class="content" >
+                  {% block content %}{% endblock %}
+               </div>
+            </div>
+            <div class="col-sm-5">
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="side-top hidden-xs hidden-sm"> <!-- make sure both exist, or else it reapears-->
+                              {% block side-up %}
+                              {% endblock %}
+                     </div>
+                  </div>
+               </div>
+
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="side-bottom hidden-xs hidden-sm">
+                        
+                              {% block side-down %}
+                              {% endblock %}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-12">
+               <div class="footer">
+                 
+
+
+               &copy; Copyright Game round 2017
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>
+

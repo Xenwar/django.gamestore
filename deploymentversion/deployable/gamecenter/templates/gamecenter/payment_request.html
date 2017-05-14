@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="http://payments.webcourse.niksula.hut.fi/pay/" method="post"> {% csrf_token %}
+    <input type="hidden" name="pid" value={{pid}} />
+    <input type="hidden" name="sid" value={{sid}} />
+    <input type="hidden" name="success_url" value="https://hidden-bastion-98067.herokuapp.com/gamecenter/paysuccess/" />
+    <input type="hidden" name="cancel_url"  value="https://hidden-bastion-98067.herokuapp.com/gamecenter/payerror/" />
+    <input type="hidden" name="error_url"   value="https://hidden-bastion-98067.herokuapp.com/gamecenter/paycancel/" />
+    <input type="hidden" name="checksum" value={{checksum}} />
+
+    <label for="id_card">Credit card</label>
+    <input type="text" id="id_card" name="card" value=""/>
+    <br>
+
+    <label for="id_game">Game</label>
+    <input type="text" id="id_game" name="gamename" value={{game_name}} />
+    <br>
+    <label for="id_amount">Amount</label>
+    <input type="text" id="id_amount" name="amount" value={{amount}} />
+    <input type="submit" value="Accept Payment"/>
+</form>
+{% endblock %}

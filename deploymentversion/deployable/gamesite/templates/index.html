@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Game Store Home</h1>
+  <p> Hello, welcome to gamesite x, please login to play your games! </p>
+<h2>Dynamic content</h2>
+  <p>Counts for member, Player, and Game:</p>
+  <ul>
+    <li><strong>Member:</strong> {{ developer_counter }}</li>
+    <li><strong>Players:</strong> {{ player_counter }}</li>
+    <li><strong>Games:</strong> {{ game_counter }}</li>
+  </ul>
+<p>Visit counter {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+{% endblock %}

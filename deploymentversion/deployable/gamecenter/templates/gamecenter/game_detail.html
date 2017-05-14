@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+  <p><strong>Name:</strong> {{ game.game_name }}</p>
+  <p><strong>Description:</strong> {{ game.game_description }}</p>
+  <p><strong>Developer:</strong> {{ game.developer }}</p>
+  <p><strong>Highest score:</strong> {{ game.max_score }}</p>
+  <p><strong>Sales count:</strong> {{ game.sales_counter }}</p>
+  <p><strong>Price:</strong> {{ game.price }}</p>
+  <div class="btn-group btn-group-justified">
+    <a href="{% url 'purchase'    game.game_name %}" class="btn btn-primary">Buy  Game</a>
+    <a href="{% url 'playgame'    game.game_name %}" class="btn btn-primary">Play  Game</a>
+    <a href="{% url 'addgame' %}" class="btn btn-primary">Add  Game</a>
+    <a href="{% url 'updategame'  game.game_name %}" class="btn btn-primary">Edit Game</a>
+    <a href="{% url 'deletegame'  game.game_name %}" class="btn btn-primary btn btn-danger">Delete Game</a>
+</div>
+{% endblock %}
+
+{% block side-up %}
+<h3>High scores</h3>
+{% for onescore in game.high_scores.allscores %}
+{{onescore.name}}  {{onescore.score}}<br>
+{%endfor%}
+{% endblock %}
+
+{% block side-down %}
+{% endblock %}

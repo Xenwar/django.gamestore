@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1>update game information.</h1>
+	<div class="row">
+		<div class="col-xs-8">
+			<form action="." method="post">{% csrf_token %}
+				{% for field in form %}
+					<div class="form-group">
+						<span class="label label-primary">{{ field.label }}</span>{{ field }}
+					</div>
+				{% endfor %}
+				 <input type="submit" class="btn btn-primary" value="Update Game">
+
+			</form>
+		</div>
+	</div>
+{% endblock %}

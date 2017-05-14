@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Currency Convertor</title>
+  <meta charset="utf-8">
+  <script src="lib/jquery-1.11.3.min.js"></script>
+  <script type = "text/javascript">
+         $(document).ready(function(){
+
+          //getting data works
+           jQuery("#hello").load("http://127.0.0.1:8000/gamesite/loadstate/1/");
+           jQuery("#hello2").load("http://127.0.0.1:8000/gamesite/loadstate/3/");
+
+
+          $.post( "http://127.0.0.1:8000/gamesite/loadstate/1/", { name: "John", time: "2pm" } );
+
+
+         });
+      </script>
+</head>
+<body>
+<h1> The good one is here</h1>
+<input type="date" id="date"/>
+<input type="submit" id="search" value = "Show Exchange Rates"/>
+<p id="hello">The book</p>
+<p id="hello2">The book</p>
+
+<table id="currencies" >
+
+</table>
+
+</body>
+</html>
+<!-- http://api.fixer.io/2010-10-20-->

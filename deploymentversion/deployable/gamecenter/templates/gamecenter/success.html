@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+{% if messages %}
+<ul class="alert alert-success">
+    {% for message in messages %}
+    <br>{{ message }}
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

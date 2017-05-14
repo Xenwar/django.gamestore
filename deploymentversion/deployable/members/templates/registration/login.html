@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1>Login</h1>
+	<div class="row">
+		<div class="col-xs-3">
+			<form action="." method="post" class="form-horizontal">{% csrf_token %}
+				{% for field in form %}
+					<div class="form-group col-xs-12">
+ 						<label class="control-label col-sm-3">{{ field.label }}</label>
+						{{ field }}
+					</div>
+				{% endfor %}
+				<input type="submit" class="btn btn-info" value="login">
+			</form>
+			 <a href="{% url 'register'  %}" class="btn btn-primary btn btn-primary">Create an Account</a>
+
+		</div>
+	</div>
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1>Add a new game to the Game store.</h1>
+	<div class="row">
+		<div class="col-xs-8">
+			<form action="." method="post">{% csrf_token %}
+				{% for field in form %}
+					<div class="form-group">
+						<span class="label label-primary">{{ field.label }}</span>{{ field }}
+					</div>
+				{% endfor %}
+				 <input type="submit" class="btn btn-primary" value="Add Game">
+			</form>
+		</div>
+	</div>
+{% endblock %}
+{% comment "resources" %}
+{{form.as_p}}
+Modelform and bootstrap form
+http://stackoverflow.com/questions/31627253/django-modelform-with-bootstrap
+
+{% endcomment %}

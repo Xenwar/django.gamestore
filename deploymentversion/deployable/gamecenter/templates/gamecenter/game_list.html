@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Game List</h1>
+    <form role="search" class="navbar-form navbar-center">
+          <div class="form-group">
+              <input type="text" placeholder="Search games" name="search" class="form-control">
+          </div>
+    </form>
+    {% if game_list %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+        <th>Game</th>
+        <th>Developer</th>
+        <th>Description</th>
+        <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for game in game_list %}
+            <tr>
+            <td><a href="{{ game.get_absolute_url }}">
+            {{ game.game_name }}</a></td>
+            <td>{{ game.developer.first_name }} {{ game.developer.last_name }}</td>
+            <td>{{ game.game_description }}     </td>
+            <td>{{ game.price }}     </td>
+              <!--cllect developer's games-->
+                {% for game in developer.game_reverse_lookup.all %}
+                  <a href="{% url 'game-detail' game.pk %}">{{ game.game_name}}</a>
+
+                  {% if not forloop.last %},
+
+                  {% endif %}{% endfor %}
+              <!--end of getting developer's games-->
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+         <p>There are no games in the system at the moment..</p>
+    {% endif %}
+{% endblock %}
+
+

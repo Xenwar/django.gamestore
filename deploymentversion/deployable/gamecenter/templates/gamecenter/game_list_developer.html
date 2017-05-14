@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Game List</h1>
+    {% if game_list %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+        <th>Game</th>
+        <th>Upload Date</th>
+        <th>Downloads</th>
+        <th>Price</th>
+        <th>Income</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for game in game_list %}
+            <tr>
+            <td><a href="{{ game.get_absolute_url }}">{{ game.game_name }}</a></td>
+            <td>{{ game.upload_date }}          </td>
+            <td>{{ game.sales_counter}}         </td>
+            <td>{{ game.price }}                </td>            
+            <td>{{ game.getSales}}    </td>
+              <!--cllect developer's games-->
+                {% for game in developer.game_reverse_lookup.all %}
+                  <a href="{% url 'game-detail' game.pk %}">{{ game.game_name}}</a>
+                  {% if not forloop.last %},
+                  {% endif %}{% endfor %}
+              <!--end of getting developer's games-->
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+         <p>There are no games with the criteria</p>
+    {% endif %}
+{% endblock %}
